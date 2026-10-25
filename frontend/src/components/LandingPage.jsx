@@ -28,7 +28,7 @@ export default function LandingPage({ onStartAssessment, onExploreBudgeter, onOp
         padding: '60px 0 80px 0',
         borderBottom: '1px solid var(--mineral-grey-border)'
       }}>
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: '1.15fr 1.05fr', gap: 48, alignItems: 'center' }}>
+        <div className="container hero-grid">
           {/* Left Column: Heading, Value Props & Primary CTA */}
           <div>
             <div style={{
@@ -47,7 +47,7 @@ export default function LandingPage({ onStartAssessment, onExploreBudgeter, onOp
               <span>AI-Powered Guidance for Rural India • SIH 26091</span>
             </div>
 
-            <h1 style={{ fontSize: '2.7rem', lineHeight: 1.18, marginBottom: 20, color: '#13151A' }}>
+            <h1 className="hero-heading">
               Smart Business Advisory & Financial Planning for <span style={{ color: '#6F3DFF' }}>Rural Entrepreneurs</span>
             </h1>
 
@@ -165,111 +165,100 @@ export default function LandingPage({ onStartAssessment, onExploreBudgeter, onOp
               }} />
             </div>
 
-            {/* Floating Card 1 (Top Left): Business Viability */}
-            <div style={{
-              position: 'absolute',
-              top: 30,
-              left: -24,
-              background: '#FFFFFF',
-              borderRadius: 14,
-              padding: '12px 16px',
-              boxShadow: '0 12px 28px rgba(19, 21, 26, 0.14)',
-              border: '1.5px solid #BFE9FF',
-              zIndex: 4,
-              minWidth: 175
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
-                <TrendingUp size={16} color="#6F3DFF" />
-                <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#13151A' }}>Business Viability</span>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-                <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748B', marginBottom: 2 }}>
-                    <span>Market Demand</span>
-                    <strong style={{ color: '#6F3DFF' }}>High</strong>
-                  </div>
-                  <div style={{ height: 4, background: '#E2E8F0', borderRadius: 999 }}>
-                    <div style={{ width: '85%', height: '100%', background: '#6F3DFF', borderRadius: 999 }} />
-                  </div>
+            {/* Responsive Floating Information Cards */}
+            <div className="hero-floating-container">
+              {/* Floating Card 1: Business Viability */}
+              <div className="hero-floating-card hero-floating-card-1" style={{
+                background: '#FFFFFF',
+                borderRadius: 14,
+                padding: '12px 16px',
+                boxShadow: '0 12px 28px rgba(19, 21, 26, 0.14)',
+                border: '1.5px solid #BFE9FF'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 8 }}>
+                  <TrendingUp size={16} color="#6F3DFF" />
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#13151A' }}>Business Viability</span>
                 </div>
-                <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748B', marginBottom: 2 }}>
-                    <span>Competition</span>
-                    <strong style={{ color: '#10B981' }}>Low</strong>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748B', marginBottom: 2 }}>
+                      <span>Market Demand</span>
+                      <strong style={{ color: '#6F3DFF' }}>High</strong>
+                    </div>
+                    <div style={{ height: 4, background: '#E2E8F0', borderRadius: 999 }}>
+                      <div style={{ width: '85%', height: '100%', background: '#6F3DFF', borderRadius: 999 }} />
+                    </div>
                   </div>
-                  <div style={{ height: 4, background: '#E2E8F0', borderRadius: 999 }}>
-                    <div style={{ width: '35%', height: '100%', background: '#10B981', borderRadius: 999 }} />
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748B', marginBottom: 2 }}>
+                      <span>Competition</span>
+                      <strong style={{ color: '#10B981' }}>Low</strong>
+                    </div>
+                    <div style={{ height: 4, background: '#E2E8F0', borderRadius: 999 }}>
+                      <div style={{ width: '35%', height: '100%', background: '#10B981', borderRadius: 999 }} />
+                    </div>
                   </div>
-                </div>
-                <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748B', marginBottom: 2 }}>
-                    <span>Profit Potential</span>
-                    <strong style={{ color: '#0369A1' }}>Good</strong>
-                  </div>
-                  <div style={{ height: 4, background: '#E2E8F0', borderRadius: 999 }}>
-                    <div style={{ width: '78%', height: '100%', background: '#0369A1', borderRadius: 999 }} />
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.72rem', color: '#64748B', marginBottom: 2 }}>
+                      <span>Profit Potential</span>
+                      <strong style={{ color: '#0369A1' }}>Good</strong>
+                    </div>
+                    <div style={{ height: 4, background: '#E2E8F0', borderRadius: 999 }}>
+                      <div style={{ width: '78%', height: '100%', background: '#0369A1', borderRadius: 999 }} />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Floating Card 2 (Bottom Left): Eligible Schemes */}
-            <div style={{
-              position: 'absolute',
-              bottom: 25,
-              left: -20,
-              background: '#FFFFFF',
-              borderRadius: 14,
-              padding: '12px 14px',
-              boxShadow: '0 12px 28px rgba(19, 21, 26, 0.14)',
-              border: '1.5px solid #BFE9FF',
-              zIndex: 4
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
-                <Landmark size={15} color="#0369A1" />
-                <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#13151A' }}>Eligible Schemes</span>
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: '0.72rem', color: '#334155' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <CheckCircle2 size={12} color="#10B981" />
-                  <span>PMMY Mudra (Tarun)</span>
+              {/* Floating Card 2: Eligible Schemes */}
+              <div className="hero-floating-card hero-floating-card-2" style={{
+                background: '#FFFFFF',
+                borderRadius: 14,
+                padding: '12px 14px',
+                boxShadow: '0 12px 28px rgba(19, 21, 26, 0.14)',
+                border: '1.5px solid #BFE9FF'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 6 }}>
+                  <Landmark size={15} color="#0369A1" />
+                  <span style={{ fontSize: '0.78rem', fontWeight: 800, color: '#13151A' }}>Eligible Schemes</span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <CheckCircle2 size={12} color="#10B981" />
-                  <span>NABARD Dairy/Agro</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <CheckCircle2 size={12} color="#10B981" />
-                  <span>PMEGP Margin Subsidy</span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <CheckCircle2 size={12} color="#10B981" />
-                  <span>State Rural Schemes</span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 4, fontSize: '0.72rem', color: '#334155' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <CheckCircle2 size={12} color="#10B981" />
+                    <span>PMMY Mudra (Tarun)</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <CheckCircle2 size={12} color="#10B981" />
+                    <span>NABARD Dairy/Agro</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <CheckCircle2 size={12} color="#10B981" />
+                    <span>PMEGP Margin Subsidy</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <CheckCircle2 size={12} color="#10B981" />
+                    <span>State Rural Schemes</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Floating Card 3 (Bottom Right): Estimated Investment & Likely Monthly Profit */}
-            <div style={{
-              position: 'absolute',
-              bottom: 20,
-              right: -18,
-              background: '#FFFFFF',
-              borderRadius: 14,
-              padding: '12px 16px',
-              boxShadow: '0 12px 28px rgba(19, 21, 26, 0.14)',
-              border: '1.5px solid #BFE9FF',
-              zIndex: 4,
-              textAlign: 'left'
-            }}>
-              <div style={{ fontSize: '0.72rem', color: '#64748B', fontWeight: 600 }}>Estimated Investment</div>
-              <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#13151A', marginTop: 1 }}>
-                ₹1.43 Lakh
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 4 }}>
-                <TrendingUp size={13} color="#10B981" />
-                <span style={{ fontSize: '0.72rem', color: '#64748B' }}>Likely Profit:</span>
-                <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#10B981' }}>₹25,000/mo</span>
+              {/* Floating Card 3: Estimated Investment & Likely Monthly Profit */}
+              <div className="hero-floating-card hero-floating-card-3" style={{
+                background: '#FFFFFF',
+                borderRadius: 14,
+                padding: '12px 16px',
+                boxShadow: '0 12px 28px rgba(19, 21, 26, 0.14)',
+                border: '1.5px solid #BFE9FF'
+              }}>
+                <div style={{ fontSize: '0.72rem', color: '#64748B', fontWeight: 600 }}>Estimated Investment</div>
+                <div style={{ fontSize: '1.35rem', fontWeight: 800, color: '#13151A', marginTop: 1 }}>
+                  ₹1.43 Lakh
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 5, marginTop: 4 }}>
+                  <TrendingUp size={13} color="#10B981" />
+                  <span style={{ fontSize: '0.72rem', color: '#64748B' }}>Likely Profit:</span>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 800, color: '#10B981' }}>₹25,000/mo</span>
+                </div>
               </div>
             </div>
           </div>

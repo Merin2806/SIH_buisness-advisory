@@ -495,7 +495,7 @@ export default function AssessmentWizard({ onComplete, onCancel, lang = 'en' }) 
   };
 
   return (
-    <div className="container" style={{ padding: '36px 24px 80px 24px', maxWidth: 960 }}>
+    <div className="container" style={{ padding: 'clamp(20px, 3vw, 36px) clamp(12px, 3vw, 24px) 100px clamp(12px, 3vw, 24px)', maxWidth: 960 }}>
       {/* Step Header */}
       <div style={{ marginBottom: 28 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
@@ -818,7 +818,7 @@ export default function AssessmentWizard({ onComplete, onCancel, lang = 'en' }) 
             </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 24, paddingTop: 16, borderTop: '1px solid #F1F5F9' }}>
+          <div className="wizard-nav-actions" style={{ justifyContent: 'flex-end' }}>
             <button 
               type="button"
               onClick={handleProceedToStep2}
@@ -968,7 +968,7 @@ export default function AssessmentWizard({ onComplete, onCancel, lang = 'en' }) 
               </div>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 20 }}>
+            <div className="wizard-nav-actions">
               <button onClick={() => setCurrentStep(1)} className="btn-secondary" style={{ padding: '9px 18px', display: 'flex', alignItems: 'center', gap: 6 }}>
                 <ArrowLeft size={16} />
                 <span>{t('previousStep')}</span>
@@ -1104,12 +1104,12 @@ export default function AssessmentWizard({ onComplete, onCancel, lang = 'en' }) 
               </div>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 24 }}>
-              <button onClick={() => setCurrentStep(2)} className="btn-secondary" style={{ padding: '9px 18px' }}>
+            <div className="wizard-nav-actions">
+              <button onClick={() => setCurrentStep(2)} className="btn-secondary" style={{ padding: '9px 18px', display: 'flex', alignItems: 'center', gap: 6 }}>
                 <ArrowLeft size={16} />
                 <span>{t('previousStep')}</span>
               </button>
-              <button onClick={() => setCurrentStep(4)} className="btn-primary" style={{ padding: '9px 22px' }}>
+              <button onClick={() => setCurrentStep(4)} className="btn-primary" style={{ padding: '9px 22px', display: 'flex', alignItems: 'center', gap: 6 }}>
                 <span>Proceed to Cost & Price Details</span>
                 <ArrowRight size={16} />
               </button>
@@ -1236,12 +1236,12 @@ export default function AssessmentWizard({ onComplete, onCancel, lang = 'en' }) 
             </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 28 }}>
-            <button onClick={() => setCurrentStep(3)} className="btn-secondary" style={{ padding: '9px 18px' }}>
+          <div className="wizard-nav-actions">
+            <button onClick={() => setCurrentStep(3)} className="btn-secondary" style={{ padding: '9px 18px', display: 'flex', alignItems: 'center', gap: 6 }}>
               <ArrowLeft size={16} />
               <span>{t('previousStep')}</span>
             </button>
-            <button onClick={() => setCurrentStep(5)} className="btn-primary" style={{ padding: '9px 22px' }}>
+            <button onClick={() => setCurrentStep(5)} className="btn-primary" style={{ padding: '9px 22px', display: 'flex', alignItems: 'center', gap: 6 }}>
               <span>Review & Generate Final Report</span>
               <ArrowRight size={16} />
             </button>
@@ -1326,15 +1326,15 @@ export default function AssessmentWizard({ onComplete, onCancel, lang = 'en' }) 
               </p>
             </div>
           ) : (
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <button onClick={() => setCurrentStep(4)} className="btn-secondary" style={{ padding: '10px 20px' }}>
+            <div className="wizard-nav-actions">
+              <button onClick={() => setCurrentStep(4)} className="btn-secondary" style={{ padding: '10px 20px', display: 'flex', alignItems: 'center', gap: 6 }}>
                 <ArrowLeft size={16} />
                 <span>{t('previousStep')}</span>
               </button>
               <button 
                 onClick={handleFinalSubmit} 
                 className="btn-primary" 
-                style={{ padding: '12px 28px', fontSize: '0.95rem' }}
+                style={{ padding: '12px 28px', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: 6 }}
               >
                 <Sparkles size={16} />
                 <span>{t('submitAssessment')}</span>

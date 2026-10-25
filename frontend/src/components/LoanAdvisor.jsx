@@ -312,7 +312,7 @@ export default function LoanAdvisor({
         background: 'linear-gradient(180deg, #FAF8FF 0%, #FFFFFF 100%)',
         boxShadow: '0 4px 20px rgba(111, 61, 255, 0.08)'
       }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 16 }}>
+        <div className="loan-advisor-banking-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div style={{
               width: 44,
@@ -322,12 +322,13 @@ export default function LoanAdvisor({
               color: '#FFFFFF',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center'
+              justifyContent: 'center',
+              flexShrink: 0
             }}>
               <Landmark size={22} />
             </div>
             <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                 <h2 style={{ fontSize: '1.25rem', color: '#1E293B', margin: 0 }}>Your Banking Details</h2>
                 <span style={{ fontSize: '0.72rem', background: '#EDE7FF', color: '#6F3DFF', padding: '3px 8px', borderRadius: 6, fontWeight: 700 }}>
                   Personalized Financing Match
@@ -343,7 +344,7 @@ export default function LoanAdvisor({
             type="button"
             onClick={() => setIsBankingOpen(!isBankingOpen)}
             className="btn-secondary"
-            style={{ padding: '6px 12px', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: 4 }}
+            style={{ padding: '6px 12px', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}
           >
             <span>{isBankingOpen ? 'Hide Section' : 'Edit Banking'}</span>
             {isBankingOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -357,7 +358,7 @@ export default function LoanAdvisor({
               <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: 700, color: '#334155', marginBottom: 6 }}>
                 1. Do you currently have a bank account? <span style={{ color: '#EF4444' }}>*</span>
               </label>
-              <div style={{ display: 'flex', gap: 12 }}>
+              <div className="banking-question-buttons">
                 <button
                   type="button"
                   onClick={() => setHasBankAccount(true)}
@@ -518,7 +519,7 @@ export default function LoanAdvisor({
                 </div>
 
                 {/* Question 4: Preference */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                <div className="grid-responsive-2">
                   <div>
                     <label style={{ display: 'block', fontSize: '0.86rem', fontWeight: 700, color: '#334155', marginBottom: 6 }}>
                       4. Lending Approach Preference

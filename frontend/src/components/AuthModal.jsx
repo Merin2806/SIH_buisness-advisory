@@ -159,20 +159,9 @@ export default function AuthModal({ initialMode = 'login', onClose, onSuccess })
       alignItems: 'center',
       justifyContent: 'center',
       zIndex: 1000,
-      padding: 20
+      padding: 'clamp(8px, 2vw, 20px)'
     }}>
-      <div style={{
-        background: '#FFFFFF',
-        borderRadius: 24,
-        maxWidth: 900,
-        width: '100%',
-        maxHeight: '90vh',
-        overflow: 'hidden',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1.1fr',
-        boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-        position: 'relative'
-      }}>
+      <div className="auth-modal-dialog">
         {/* Close Button */}
         <button 
           onClick={onClose}
@@ -196,14 +185,7 @@ export default function AuthModal({ initialMode = 'login', onClose, onSuccess })
         </button>
 
         {/* Split Screen Visual Side */}
-        <div style={{
-          background: 'linear-gradient(145deg, #6F3DFF 0%, #4D26C4 60%, #BFE9FF 100%)',
-          padding: 40,
-          color: '#FFFFFF',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between'
-        }}>
+        <div className="auth-modal-banner">
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 28 }}>
               <Building2 size={28} color="#BFE9FF" />
@@ -313,7 +295,7 @@ export default function AuthModal({ initialMode = 'login', onClose, onSuccess })
         </div>
 
         {/* Split Screen Form Side */}
-        <div style={{ padding: '36px 36px', overflowY: 'auto' }}>
+        <div className="auth-modal-form-container">
           <div style={{ marginBottom: 24 }}>
             <h2 style={{ fontSize: '1.5rem', marginBottom: 6 }}>
               {mode === 'login' ? 'Sign In to Your Account' : 'Register New Account'}

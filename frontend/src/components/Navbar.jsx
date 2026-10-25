@@ -240,25 +240,7 @@ export default function Navbar({
 
             {/* Mobile Voice Trigger (Compact for small screens) */}
             <div className="mobile-only-widget">
-              <button
-                type="button"
-                onClick={onOpenVoice}
-                aria-label="Voice Assistant"
-                style={{
-                  width: 38,
-                  height: 38,
-                  borderRadius: 8,
-                  border: '1.5px solid #BFE9FF',
-                  background: '#F0F9FF',
-                  color: '#6F3DFF',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  cursor: 'pointer'
-                }}
-              >
-                <VoiceAssistantButton onClick={onOpenVoice} lang={lang} showLabel={false} />
-              </button>
+              <VoiceAssistantButton onClick={onOpenVoice} lang={lang} showLabel={false} />
             </div>
 
             {/* Mobile Hamburger Toggle Button */}

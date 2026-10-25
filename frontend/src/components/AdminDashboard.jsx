@@ -249,14 +249,7 @@ export default function AdminDashboard({
       </div>
 
       {/* Primary Section Switcher */}
-      <div style={{
-        display: 'flex',
-        gap: 8,
-        borderBottom: '2px solid #E2E8F0',
-        paddingBottom: 10,
-        marginBottom: 28,
-        overflowX: 'auto'
-      }}>
+      <div className="horizontal-scroll-tabs">
         {[
           { id: 'overview', label: 'Dashboard' },
           { id: 'yojanas', label: `Yojana Management (${schemes.length})` },
@@ -419,8 +412,8 @@ export default function AdminDashboard({
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           {/* Controls Bar */}
           <div className="card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 14 }}>
-            <div style={{ display: 'flex', gap: 12, alignItems: 'center', flex: 1 }}>
-              <div style={{ position: 'relative', flex: 1, maxWidth: 360 }}>
+            <div style={{ display: 'flex', gap: 12, alignItems: 'center', flex: 1, flexWrap: 'wrap' }}>
+              <div style={{ position: 'relative', flex: 1, minWidth: 220, maxWidth: 360 }}>
                 <Search size={16} style={{ position: 'absolute', top: 12, left: 12, color: '#94A3B8' }} />
                 <input
                   type="text"
@@ -432,7 +425,7 @@ export default function AdminDashboard({
               </div>
 
               {/* Status Filter */}
-              <div style={{ display: 'flex', gap: 6, fontSize: '0.82rem' }}>
+              <div style={{ display: 'flex', gap: 6, fontSize: '0.82rem', flexWrap: 'wrap' }}>
                 {['All', 'Verified', 'Pending Verification', 'Demonstration Data'].map((st) => (
                   <button
                     key={st}
@@ -465,7 +458,7 @@ export default function AdminDashboard({
 
           {/* Scheme Table */}
           <div className="card">
-            <div style={{ overflowX: 'auto' }}>
+            <div className="table-responsive-container">
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.88rem' }}>
                 <thead>
                   <tr style={{ borderBottom: '2px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase' }}>
@@ -616,7 +609,7 @@ export default function AdminDashboard({
               </button>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
+            <div className="grid-responsive-3" style={{ gap: 12 }}>
               {categoriesList.map((c) => (
                 <div key={c.id} style={{ background: '#F8FAFC', padding: 12, borderRadius: 10, border: '1px solid #E2E8F0' }}>
                   <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#1E293B' }}>{c.name}</div>
@@ -636,7 +629,7 @@ export default function AdminDashboard({
               Rule Enforced: Synthetic Poisson process estimates are tracked separately and never blended with observed OpenStreetMap features without explicit provenance labels.
             </p>
 
-            <div style={{ overflowX: 'auto' }}>
+            <div className="table-responsive-container">
               <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', fontSize: '0.86rem' }}>
                 <thead>
                   <tr style={{ borderBottom: '2px solid #E2E8F0', color: '#64748B', fontSize: '0.75rem', textTransform: 'uppercase' }}>

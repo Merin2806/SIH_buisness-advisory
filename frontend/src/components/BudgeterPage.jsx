@@ -139,13 +139,13 @@ export default function BudgeterPage({ user }) {
   if (!results) return null;
 
   return (
-    <div className="container" style={{ padding: '40px 24px 80px 24px' }}>
+    <div className="container" style={{ padding: 'clamp(20px, 4vw, 40px) 16px 80px 16px' }}>
       <div style={{ marginBottom: 32 }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#EDE7FF', color: '#6F3DFF', padding: '4px 12px', borderRadius: 999, fontSize: '0.8rem', fontWeight: 700, marginBottom: 8 }}>
           <Sliders size={14} />
           <span>Interactive Unit Economics Engine</span>
         </div>
-        <h1 style={{ fontSize: '2.2rem', marginBottom: 6 }}>
+        <h1 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)', marginBottom: 6 }}>
           Dynamic Break-Even & Profit Budgeter
         </h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1rem' }}>
@@ -153,7 +153,7 @@ export default function BudgeterPage({ user }) {
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 32 }}>
+      <div className="budgeter-split-grid">
         {/* Sliders & Numeric Inputs Column */}
         <div className="card">
           <h2 style={{ fontSize: '1.35rem', marginBottom: 20 }}>Adjust Operational Cost Levers</h2>
@@ -287,7 +287,7 @@ export default function BudgeterPage({ user }) {
           </div>
 
           {/* Key Output Metrics */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 20 }}>
+          <div className="grid-responsive-2" style={{ marginBottom: 20 }}>
             <div className="card">
               <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Daily Break-Even Target</div>
               <div style={{ fontSize: '1.65rem', fontWeight: 800, color: '#6F3DFF' }}>
@@ -332,7 +332,7 @@ export default function BudgeterPage({ user }) {
           {/* Sensitivity Table */}
           <div className="card" style={{ marginBottom: 20 }}>
             <h3 style={{ fontSize: '1.1rem', marginBottom: 10 }}>Market Stress-Test Sensitivity Matrix</h3>
-            <div style={{ overflowX: 'auto' }}>
+            <div className="table-responsive-container">
               <table style={{ width: '100%', fontSize: '0.82rem', borderCollapse: 'collapse' }}>
                 <thead>
                   <tr style={{ borderBottom: '1px solid #E2E8F0', color: 'var(--text-muted)' }}>

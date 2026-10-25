@@ -221,7 +221,7 @@ export default function ReportViewer({ assessmentId, onBack }) {
       <div style={{
         background: 'linear-gradient(135deg, #13151A 0%, #2A2538 100%)',
         borderRadius: 24,
-        padding: '32px 36px',
+        padding: 'clamp(18px, 3.5vw, 32px) clamp(16px, 4vw, 36px)',
         color: '#FFFFFF',
         marginBottom: 28,
         display: 'flex',
@@ -232,7 +232,7 @@ export default function ReportViewer({ assessmentId, onBack }) {
         boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)'
       }}>
         <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8, flexWrap: 'wrap' }}>
             <span style={{ background: '#6F3DFF', color: '#FFF', fontSize: '0.75rem', fontWeight: 800, padding: '3px 10px', borderRadius: 999 }}>
               {category_name}
             </span>
@@ -241,15 +241,15 @@ export default function ReportViewer({ assessmentId, onBack }) {
             </span>
           </div>
 
-          <h1 style={{ fontSize: '2.1rem', color: '#FFFFFF', marginBottom: 6 }}>
+          <h1 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)', color: '#FFFFFF', marginBottom: 6 }}>
             {proposed_business_name}
           </h1>
 
-          <div style={{ display: 'flex', gap: 20, fontSize: '0.9rem', color: '#E2E8F0', marginTop: 12 }}>
+          <div style={{ display: 'flex', gap: '8px 16px', fontSize: '0.9rem', color: '#E2E8F0', marginTop: 12, flexWrap: 'wrap', alignItems: 'center' }}>
             <div>Project Cost: <strong style={{ color: '#FFFFFF' }}>₹{financials.total_project_cost.toLocaleString()}</strong></div>
-            <div>•</div>
+            <div style={{ opacity: 0.6 }}>•</div>
             <div>Net Bank Loan: <strong style={{ color: '#BFE9FF' }}>₹{financials.loan_principal.toLocaleString()}</strong></div>
-            <div>•</div>
+            <div style={{ opacity: 0.6 }}>•</div>
             <div>Subsidized EMI: <strong style={{ color: '#10B981' }}>₹{financials.monthly_emi.toLocaleString()}/mo</strong></div>
           </div>
         </div>
