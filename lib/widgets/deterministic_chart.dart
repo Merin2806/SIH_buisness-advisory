@@ -27,10 +27,14 @@ class DeterministicCapitalChart extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 8,
+            runSpacing: 8,
             children: [
               Row(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
                     padding: const EdgeInsets.all(8),
@@ -45,25 +49,32 @@ class DeterministicCapitalChart extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 10),
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Capital vs. Margin Breakdown',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.textPrimary,
+                  const Flexible(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          'Capital vs. Margin',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.textPrimary,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Deterministic Debt-Equity Structuring',
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: AppColors.textSecondary,
+                        Text(
+                          'Deterministic Debt-Equity',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 11,
+                            color: AppColors.textSecondary,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -86,11 +97,10 @@ class DeterministicCapitalChart extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 24),
-          // Chart Visual Row
-          Row(
-            children: [
-              // Custom Donut Canvas
-              SizedBox(
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final isNarrow = constraints.maxWidth < 310;
+              final donutWidget = SizedBox(
                 width: 130,
                 height: 130,
                 child: Stack(
@@ -128,39 +138,54 @@ class DeterministicCapitalChart extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(width: 20),
-              // Segment Breakdown Details
-              Expanded(
-                child: Column(
+              );
+
+              final legendWidget = Column(
+                children: [
+                  _buildLegendItem(
+                    label: 'Net Bank Loan',
+                    amount: financials.netBankLoanAmount,
+                    pct: loanPct,
+                    color: AppColors.ultraviolet,
+                    tag: 'PMMY Debt',
+                  ),
+                  const SizedBox(height: 10),
+                  _buildLegendItem(
+                    label: 'Govt Capital Grant',
+                    amount: financials.subsidyGrantAmount,
+                    pct: subsidyPct,
+                    color: AppColors.glacierBlue,
+                    tag: 'NABARD Subsidy',
+                  ),
+                  const SizedBox(height: 10),
+                  _buildLegendItem(
+                    label: 'Promoter Margin',
+                    amount: financials.promoterMarginAmount,
+                    pct: marginPct,
+                    color: const Color(0xFF4A90E2),
+                    tag: 'Own Equity',
+                  ),
+                ],
+              );
+
+              if (isNarrow) {
+                return Column(
                   children: [
-                    _buildLegendItem(
-                      label: 'Net Bank Loan',
-                      amount: financials.netBankLoanAmount,
-                      pct: loanPct,
-                      color: AppColors.ultraviolet,
-                      tag: 'PMMY Debt',
-                    ),
-                    const SizedBox(height: 10),
-                    _buildLegendItem(
-                      label: 'Govt Capital Grant',
-                      amount: financials.subsidyGrantAmount,
-                      pct: subsidyPct,
-                      color: AppColors.glacierBlue,
-                      tag: 'NABARD Subsidy',
-                    ),
-                    const SizedBox(height: 10),
-                    _buildLegendItem(
-                      label: 'Promoter Margin',
-                      amount: financials.promoterMarginAmount,
-                      pct: marginPct,
-                      color: const Color(0xFF4A90E2),
-                      tag: 'Own Equity',
-                    ),
+                    Center(child: donutWidget),
+                    const SizedBox(height: 18),
+                    legendWidget,
                   ],
-                ),
-              ),
-            ],
+                );
+              }
+
+              return Row(
+                children: [
+                  donutWidget,
+                  const SizedBox(width: 20),
+                  Expanded(child: legendWidget),
+                ],
+              );
+            },
           ),
           const SizedBox(height: 16),
           // Stacked Progress Bar Representation
@@ -215,6 +240,8 @@ class DeterministicCapitalChart extends StatelessWidget {
             children: [
               Text(
                 label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
@@ -223,6 +250,8 @@ class DeterministicCapitalChart extends StatelessWidget {
               ),
               Text(
                 tag,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(
                   fontSize: 10,
                   color: AppColors.textMuted,

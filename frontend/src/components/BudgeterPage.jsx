@@ -229,7 +229,7 @@ export default function BudgeterPage({ user, onBack }) {
 
           <div style={{ borderTop: '1px solid #E2E8F0', paddingTop: 20, marginBottom: 20 }}>
             <h3 style={{ fontSize: '1.05rem', marginBottom: 14 }}>Monthly Fixed Overhead Breakdown</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+            <div className="overhead-inputs-grid">
               <div>
                 <label style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>Shop / Land Rent (₹/mo)</label>
                 <input 

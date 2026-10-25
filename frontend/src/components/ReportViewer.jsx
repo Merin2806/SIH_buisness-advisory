@@ -197,9 +197,9 @@ export default function ReportViewer({ assessmentId, onBack }) {
   };
 
   return (
-    <div className="container" style={{ padding: '30px 24px 80px 24px' }}>
+    <div className="container" style={{ padding: 'clamp(16px, 3vw, 30px) clamp(12px, 3vw, 24px) 80px clamp(12px, 3vw, 24px)' }}>
       {/* Top Header / Nav back */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+      <div className="report-top-header">
         <button 
           onClick={onBack}
           className="btn-secondary"
@@ -209,7 +209,7 @@ export default function ReportViewer({ assessmentId, onBack }) {
           <span>Back to Dashboard</span>
         </button>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <div className="report-id-badge-group">
           <span className="badge-osm">🟢 100% Grounded</span>
           <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>
             Assessment ID #{reportData.id}
@@ -218,20 +218,8 @@ export default function ReportViewer({ assessmentId, onBack }) {
       </div>
 
       {/* Hero Overview Banner */}
-      <div style={{
-        background: 'linear-gradient(135deg, #13151A 0%, #2A2538 100%)',
-        borderRadius: 24,
-        padding: 'clamp(18px, 3.5vw, 32px) clamp(16px, 4vw, 36px)',
-        color: '#FFFFFF',
-        marginBottom: 28,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        gap: 20,
-        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)'
-      }}>
-        <div>
+      <div className="report-hero-card">
+        <div className="report-hero-details">
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8, flexWrap: 'wrap' }}>
             <span style={{ background: '#6F3DFF', color: '#FFF', fontSize: '0.75rem', fontWeight: 800, padding: '3px 10px', borderRadius: 999 }}>
               {category_name}
@@ -241,11 +229,11 @@ export default function ReportViewer({ assessmentId, onBack }) {
             </span>
           </div>
 
-          <h1 style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)', color: '#FFFFFF', marginBottom: 6 }}>
+          <h1 style={{ fontSize: 'clamp(1.35rem, 3.5vw, 2.1rem)', color: '#FFFFFF', marginBottom: 6, wordBreak: 'break-word' }}>
             {proposed_business_name}
           </h1>
 
-          <div style={{ display: 'flex', gap: '8px 16px', fontSize: '0.9rem', color: '#E2E8F0', marginTop: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: '8px 16px', fontSize: '0.88rem', color: '#E2E8F0', marginTop: 12, flexWrap: 'wrap', alignItems: 'center' }}>
             <div>Project Cost: <strong style={{ color: '#FFFFFF' }}>₹{financials.total_project_cost.toLocaleString()}</strong></div>
             <div style={{ opacity: 0.6 }}>•</div>
             <div>Net Bank Loan: <strong style={{ color: '#BFE9FF' }}>₹{financials.loan_principal.toLocaleString()}</strong></div>
@@ -255,16 +243,8 @@ export default function ReportViewer({ assessmentId, onBack }) {
         </div>
 
         {/* Audio Narration Console */}
-        <div style={{
-          background: 'rgba(255, 255, 255, 0.08)',
-          border: '1px solid rgba(255, 255, 255, 0.15)',
-          borderRadius: 16,
-          padding: '16px 20px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 10
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+        <div className="report-audio-console">
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: '0.82rem', color: '#BFE9FF', fontWeight: 700 }}>
               <Volume2 size={16} />
               <span>Bhashini Audio Narration</span>
@@ -279,7 +259,8 @@ export default function ReportViewer({ assessmentId, onBack }) {
                 border: 'none',
                 borderRadius: 6,
                 padding: '4px 8px',
-                fontSize: '0.75rem'
+                fontSize: '0.75rem',
+                cursor: 'pointer'
               }}
             >
               <option value="en" style={{ color: '#000' }}>English (EN)</option>
@@ -288,7 +269,7 @@ export default function ReportViewer({ assessmentId, onBack }) {
             </select>
           </div>
 
-          <div style={{ display: 'flex', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             <button 
               onClick={() => speakText(getFullAudioScript(), 'full')}
               style={{
@@ -300,7 +281,9 @@ export default function ReportViewer({ assessmentId, onBack }) {
                 fontSize: '0.8rem',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 6
+                gap: 6,
+                flex: '1 1 auto',
+                justifyContent: 'center'
               }}
             >
               {isPlayingAudio && currentSpeakingSection === 'full' ? <Pause size={14} /> : <Play size={14} />}
@@ -324,20 +307,21 @@ export default function ReportViewer({ assessmentId, onBack }) {
       </div>
 
       {/* Tabs Selector */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px solid #E2E8F0', marginBottom: 28 }}>
-        <div style={{ display: 'flex', gap: 24 }}>
+      <div className="report-tabs-bar">
+        <div className="report-tabs-list">
           <button 
             onClick={() => setActiveTab('advisory')}
             style={{
               padding: '12px 0',
               fontWeight: 700,
-              fontSize: '1.05rem',
+              fontSize: 'clamp(0.9rem, 2.5vw, 1.05rem)',
               color: activeTab === 'advisory' ? '#6F3DFF' : 'var(--text-secondary)',
               borderBottom: activeTab === 'advisory' ? '3px solid #6F3DFF' : '3px solid transparent',
+              whiteSpace: 'nowrap',
               transition: 'all 0.2s'
             }}
           >
-            1. Advisory & Feasibility (6-Part Report)
+            1. Advisory & Feasibility
           </button>
 
           <button 
@@ -345,21 +329,22 @@ export default function ReportViewer({ assessmentId, onBack }) {
             style={{
               padding: '12px 0',
               fontWeight: 700,
-              fontSize: '1.05rem',
+              fontSize: 'clamp(0.9rem, 2.5vw, 1.05rem)',
               color: activeTab === 'financial' ? '#6F3DFF' : 'var(--text-secondary)',
               borderBottom: activeTab === 'financial' ? '3px solid #6F3DFF' : '3px solid transparent',
+              whiteSpace: 'nowrap',
               transition: 'all 0.2s'
             }}
           >
-            2. Deterministic Financial Structuring (Zero AI Math)
+            2. Deterministic Financials
           </button>
         </div>
 
         {/* Truth Filter Switcher */}
         {activeTab === 'advisory' && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>Filter Telemetry:</span>
-            <div style={{ background: '#F1F5F9', padding: 3, borderRadius: 8, display: 'flex', gap: 4 }}>
+          <div className="report-filter-cluster">
+            <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: 600 }}>Filter:</span>
+            <div style={{ background: '#F1F5F9', padding: 3, borderRadius: 8, display: 'flex', gap: 4, flexWrap: 'wrap' }}>
               <button 
                 onClick={() => setTruthFilter('all')}
                 style={{
@@ -412,12 +397,12 @@ export default function ReportViewer({ assessmentId, onBack }) {
         <div>
           {/* Section 1: Market Reach */}
           <div className="card" style={{ marginBottom: 24 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginBottom: 12 }}>
               <h3 style={{ fontSize: '1.25rem', color: '#13151A' }}>1. Market Reach & Footfall</h3>
               <button 
                 onClick={() => speakText(advisory_report.market_reach.summary, 'market_reach')}
                 className="btn-secondary"
-                style={{ padding: '6px 10px', fontSize: '0.75rem' }}
+                style={{ padding: '6px 12px', fontSize: '0.78rem' }}
               >
                 <Volume2 size={14} />
                 <span>Listen Section</span>
@@ -427,10 +412,10 @@ export default function ReportViewer({ assessmentId, onBack }) {
               {advisory_report.market_reach.summary}
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 16 }}>
+            <div className="report-evidence-grid">
               {filterEvidence(advisory_report.market_reach.evidence_items).map((ev, i) => (
                 <div key={i} style={{ background: '#F8FAFC', padding: 14, borderRadius: 12, border: '1px solid #E2E8F0' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 6, marginBottom: 4 }}>
                     <span style={{ fontSize: '0.82rem', fontWeight: 700 }}>{ev.label}</span>
                     <span className={ev.source_type === 'observed_osm' ? 'badge-osm' : 'badge-ai'}>
                       {ev.source_type === 'observed_osm' ? '🟢 OSM Data' : '🟡 AI Model'}
@@ -452,12 +437,12 @@ export default function ReportViewer({ assessmentId, onBack }) {
 
           {/* Section 2: Underserved Niches */}
           <div className="card" style={{ marginBottom: 24 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginBottom: 12 }}>
               <h3 style={{ fontSize: '1.25rem', color: '#13151A' }}>2. Underserved Niches</h3>
               <button 
                 onClick={() => speakText(advisory_report.underserved_niches.summary, 'underserved_niches')}
                 className="btn-secondary"
-                style={{ padding: '6px 10px', fontSize: '0.75rem' }}
+                style={{ padding: '6px 12px', fontSize: '0.78rem' }}
               >
                 <Volume2 size={14} />
                 <span>Listen Section</span>
@@ -467,10 +452,10 @@ export default function ReportViewer({ assessmentId, onBack }) {
               {advisory_report.underserved_niches.summary}
             </p>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14, marginBottom: 16 }}>
+            <div className="report-evidence-grid">
               {filterEvidence(advisory_report.underserved_niches.evidence_items).map((ev, i) => (
                 <div key={i} style={{ background: '#F8FAFC', padding: 14, borderRadius: 12, border: '1px solid #E2E8F0' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 6, marginBottom: 4 }}>
                     <span style={{ fontSize: '0.82rem', fontWeight: 700 }}>{ev.label}</span>
                     <span className={ev.source_type === 'observed_osm' ? 'badge-osm' : 'badge-ai'}>
                       {ev.source_type === 'observed_osm' ? '🟢 OSM Data' : '🟡 Verified Guide'}
@@ -486,7 +471,7 @@ export default function ReportViewer({ assessmentId, onBack }) {
           {/* Section 3: Budget-Scaled SWOT */}
           <div className="card" style={{ marginBottom: 24 }}>
             <h3 style={{ fontSize: '1.25rem', color: '#13151A', marginBottom: 16 }}>3. Budget-Scaled SWOT Analysis Matrix</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+            <div className="swot-grid">
               <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', borderRadius: 12, padding: 16 }}>
                 <div style={{ fontWeight: 800, color: '#065F46', marginBottom: 8, fontSize: '0.92rem' }}>STRENGTHS</div>
                 <ul style={{ paddingLeft: 18, fontSize: '0.85rem', color: '#064E3B', lineHeight: 1.6 }}>
@@ -531,10 +516,10 @@ export default function ReportViewer({ assessmentId, onBack }) {
             <p style={{ color: 'var(--text-secondary)', marginBottom: 16 }}>
               {advisory_report.local_threats.summary}
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+            <div className="report-evidence-grid">
               {filterEvidence(advisory_report.local_threats.evidence_items).map((ev, i) => (
                 <div key={i} style={{ background: '#F8FAFC', padding: 14, borderRadius: 12, border: '1px solid #E2E8F0' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 6, marginBottom: 4 }}>
                     <span style={{ fontSize: '0.82rem', fontWeight: 700 }}>{ev.label}</span>
                     <span className="badge-osm">🟢 Ground Telemetry</span>
                   </div>
@@ -554,9 +539,9 @@ export default function ReportViewer({ assessmentId, onBack }) {
 
             {/* Interactive OpenStreetMap Container */}
             <div style={{ marginBottom: 18 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+              <div className="osm-map-legend-bar">
                 <span style={{ fontSize: '0.82rem', fontWeight: 700, color: '#6F3DFF' }}>OpenStreetMap Telemetry Map</span>
-                <div style={{ display: 'flex', gap: 12, fontSize: '0.78rem' }}>
+                <div style={{ display: 'flex', gap: 10, fontSize: '0.76rem', flexWrap: 'wrap' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>🟣 Proposed Unit</span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>🟢 Verified OSM</span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>🟡 Synthetic Model</span>
@@ -564,14 +549,14 @@ export default function ReportViewer({ assessmentId, onBack }) {
               </div>
               <div 
                 ref={mapContainerRef}
-                style={{ width: '100%', height: 320, borderRadius: 14, overflow: 'hidden', border: '1px solid #CBD5E1' }}
+                className="osm-map-container"
               ></div>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+            <div className="report-evidence-grid">
               {filterEvidence(advisory_report.competitor_density.evidence_items).map((ev, i) => (
                 <div key={i} style={{ background: '#F8FAFC', padding: 14, borderRadius: 12, border: '1px solid #E2E8F0' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 6, marginBottom: 4 }}>
                     <span style={{ fontSize: '0.82rem', fontWeight: 700 }}>{ev.label}</span>
                     <span className={ev.source_type === 'observed_osm' ? 'badge-osm' : 'badge-ai'}>
                       {ev.source_type === 'observed_osm' ? '🟢 Observed OSM' : '🟡 Synthetic Model'}
@@ -590,10 +575,10 @@ export default function ReportViewer({ assessmentId, onBack }) {
             <p style={{ color: 'var(--text-secondary)', marginBottom: 16 }}>
               {advisory_report.suggested_pricing.summary}
             </p>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+            <div className="report-evidence-grid">
               {filterEvidence(advisory_report.suggested_pricing.evidence_items).map((ev, i) => (
                 <div key={i} style={{ background: '#F8FAFC', padding: 14, borderRadius: 12, border: '1px solid #E2E8F0' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 6, marginBottom: 4 }}>
                     <span style={{ fontSize: '0.82rem', fontWeight: 700 }}>{ev.label}</span>
                     <span className="badge-osm">🟢 Actuarial Math</span>
                   </div>
@@ -610,28 +595,28 @@ export default function ReportViewer({ assessmentId, onBack }) {
       {activeTab === 'financial' && (
         <div>
           {/* Key Metric Highlights */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+          <div className="financial-highlights-grid">
             <div className="card">
               <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Subsidized Monthly EMI</div>
-              <div style={{ fontSize: '1.65rem', fontWeight: 800, color: '#6F3DFF' }}>₹{financials.monthly_emi.toLocaleString()}/mo</div>
+              <div style={{ fontSize: 'clamp(1.35rem, 2.5vw, 1.65rem)', fontWeight: 800, color: '#6F3DFF' }}>₹{financials.monthly_emi.toLocaleString()}/mo</div>
               <div style={{ fontSize: '0.75rem', color: '#10B981', fontWeight: 600 }}>Post-Grace Period Servicing</div>
             </div>
 
             <div className="card">
               <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Effective Interest Rate</div>
-              <div style={{ fontSize: '1.65rem', fontWeight: 800, color: '#13151A' }}>{financials.effective_interest_rate}% p.a.</div>
+              <div style={{ fontSize: 'clamp(1.35rem, 2.5vw, 1.65rem)', fontWeight: 800, color: '#13151A' }}>{financials.effective_interest_rate}% p.a.</div>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>2.0% Govt Interest Subvention</div>
             </div>
 
             <div className="card">
               <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Moratorium Grace Period</div>
-              <div style={{ fontSize: '1.65rem', fontWeight: 800, color: '#0284C7' }}>{financials.moratorium_months} Months</div>
+              <div style={{ fontSize: 'clamp(1.35rem, 2.5vw, 1.65rem)', fontWeight: 800, color: '#0284C7' }}>{financials.moratorium_months} Months</div>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Flock/Machinery Ramp-up</div>
             </div>
 
             <div className="card">
               <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Coverage Ratio (DSCR)</div>
-              <div style={{ fontSize: '1.65rem', fontWeight: 800, color: '#10B981' }}>{financials.dscr}x</div>
+              <div style={{ fontSize: 'clamp(1.35rem, 2.5vw, 1.65rem)', fontWeight: 800, color: '#10B981' }}>{financials.dscr}x</div>
               <div style={{ fontSize: '0.75rem', color: '#10B981', fontWeight: 600 }}>Healthy Lending Threshold</div>
             </div>
           </div>
@@ -639,7 +624,7 @@ export default function ReportViewer({ assessmentId, onBack }) {
           {/* Capital vs Margin Donut Representation */}
           <div className="card" style={{ marginBottom: 28 }}>
             <h3 style={{ fontSize: '1.25rem', marginBottom: 16 }}>Capital Structuring Breakdown (Reconciled)</h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1.2fr 1fr', gap: 32, alignItems: 'center' }}>
+            <div className="capital-structuring-grid">
               <div>
                 <div style={{ height: 26, background: '#E2E8F0', borderRadius: 999, overflow: 'hidden', display: 'flex', marginBottom: 16 }}>
                   <div style={{ width: `${(financials.loan_principal / financials.total_project_cost) * 100}%`, background: '#6F3DFF', title: 'Bank Loan' }}></div>

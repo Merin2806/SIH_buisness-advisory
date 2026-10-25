@@ -7,6 +7,7 @@ import '../theme/app_colors.dart';
 import '../widgets/app_icon.dart';
 import '../widgets/deterministic_chart.dart';
 import '../widgets/dynamic_unit_economics.dart';
+import '../widgets/osm_map_preview.dart';
 import '../widgets/truth_flag_badge.dart';
 
 class DashboardScreen extends StatelessWidget {
@@ -70,7 +71,7 @@ class DashboardScreen extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 constraints: const BoxConstraints(),
               ),
-              const SizedBox(width: 12),
+              const SizedBox(width: 10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,12 +80,16 @@ class DashboardScreen extends StatelessWidget {
                       children: [
                         AppIcon(cat.icon, size: 13, color: const Color(0xFFD6E4F5)),
                         const SizedBox(width: 6),
-                        Text(
-                          cat.title,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w800,
-                            color: Colors.white,
+                        Expanded(
+                          child: Text(
+                            cat.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w800,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       ],
@@ -92,6 +97,8 @@ class DashboardScreen extends StatelessWidget {
                     const SizedBox(height: 2),
                     const Text(
                       'Shivajinagar, Baramati (18.1512° N, 74.5771° E)',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                         fontSize: 11,
                         color: Color(0xFFE2E8F5),
@@ -100,18 +107,19 @@ class DashboardScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(width: 8),
               // Feasibility Score Badge
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.18),
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(12),
                   border: Border.all(color: Colors.white30),
                 ),
                 child: const Column(
                   children: [
                     Text(
-                      'VIABILITY SCORE',
+                      'VIABILITY',
                       style: TextStyle(
                         fontSize: 8,
                         fontWeight: FontWeight.w800,
@@ -122,7 +130,7 @@ class DashboardScreen extends StatelessWidget {
                     Text(
                       '88 / 100',
                       style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.w900,
                         color: Colors.white,
                       ),
@@ -210,12 +218,16 @@ class DashboardScreen extends StatelessWidget {
                   color: isActive ? AppColors.ultraviolet : AppColors.textMuted,
                 ),
                 const SizedBox(width: 6),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w800,
-                    color: isActive ? AppColors.ultraviolet : AppColors.textSecondary,
+                Flexible(
+                  child: Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                      color: isActive ? AppColors.ultraviolet : AppColors.textSecondary,
+                    ),
                   ),
                 ),
               ],
@@ -223,6 +235,8 @@ class DashboardScreen extends StatelessWidget {
             const SizedBox(height: 2),
             Text(
               subtitle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 9,
                 fontWeight: FontWeight.w600,
@@ -296,8 +310,11 @@ class DashboardScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            spacing: 8,
+            runSpacing: 6,
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -315,19 +332,28 @@ class DashboardScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              const Row(
-                children: [
-                  Icon(Icons.verified, size: 14, color: AppColors.truthGreen),
-                  SizedBox(width: 4),
-                  Text(
-                    'MoF & NABARD Gazetted',
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.truthGreen,
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 3),
+                decoration: BoxDecoration(
+                  color: AppColors.truthGreenBg,
+                  borderRadius: BorderRadius.circular(6),
+                  border: Border.all(color: AppColors.truthGreenBorder),
+                ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(Icons.verified, size: 12, color: AppColors.truthGreen),
+                    SizedBox(width: 4),
+                    Text(
+                      'NABARD Gazetted',
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.truthGreen,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
@@ -378,8 +404,11 @@ class DashboardScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Wrap(
+            spacing: 8,
+            runSpacing: 6,
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               const Text(
                 'Deterministic Loan Structuring',
@@ -641,14 +670,19 @@ class DashboardScreen extends StatelessWidget {
           const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'The 6-Part Geo-RAG Advisory Dossier',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w900,
-                  color: AppColors.textPrimary,
+              Expanded(
+                child: Text(
+                  'The 6-Part Geo-RAG Advisory Dossier',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w900,
+                    color: AppColors.textPrimary,
+                  ),
                 ),
               ),
+              SizedBox(width: 8),
               Text(
                 'Truth-Flagged',
                 style: TextStyle(
@@ -683,30 +717,32 @@ class DashboardScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Icon(Icons.filter_alt_outlined, size: 14, color: AppColors.ultraviolet),
-                  SizedBox(width: 6),
-                  Text(
-                    'Truth Flagging Verification Filter',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w800,
-                      color: AppColors.textPrimary,
-                    ),
+              Icon(Icons.filter_alt_outlined, size: 14, color: AppColors.ultraviolet),
+              SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  'Truth Verification Filter',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w800,
+                    color: AppColors.textPrimary,
                   ),
-                ],
+                ),
               ),
+              SizedBox(width: 6),
               Text(
-                'Source Transparency',
+                'Sources',
                 style: TextStyle(fontSize: 10, color: AppColors.textMuted),
               ),
             ],
           ),
           const SizedBox(height: 10),
-          Row(
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
             children: [
               _buildFilterChip(
                 label: 'All Insights',
@@ -714,7 +750,6 @@ class DashboardScreen extends StatelessWidget {
                 currentValue: provider.truthFilter,
                 onSelected: () => provider.setTruthFilter('all'),
               ),
-              const SizedBox(width: 8),
               _buildFilterChip(
                 label: 'Hard Data (OSM)',
                 filterValue: 'hard_data',
@@ -722,7 +757,6 @@ class DashboardScreen extends StatelessWidget {
                 color: AppColors.truthGreen,
                 onSelected: () => provider.setTruthFilter('hard_data'),
               ),
-              const SizedBox(width: 8),
               _buildFilterChip(
                 label: 'AI Projections',
                 filterValue: 'ai_projection',
@@ -746,31 +780,29 @@ class DashboardScreen extends StatelessWidget {
   }) {
     final bool isSelected = filterValue == currentValue;
 
-    return Expanded(
-      child: InkWell(
-        onTap: onSelected,
-        borderRadius: BorderRadius.circular(10),
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 7),
-          decoration: BoxDecoration(
+    return InkWell(
+      onTap: onSelected,
+      borderRadius: BorderRadius.circular(10),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? (color ?? AppColors.ultraviolet)
+              : AppColors.surfaceLight,
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
             color: isSelected
                 ? (color ?? AppColors.ultraviolet)
-                : AppColors.surfaceLight,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: isSelected
-                  ? (color ?? AppColors.ultraviolet)
-                  : AppColors.mineralGreyLight,
-            ),
+                : AppColors.mineralGreyLight,
           ),
-          child: Text(
-            label,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w700,
-              color: isSelected ? Colors.white : AppColors.textSecondary,
-            ),
+        ),
+        child: Text(
+          label,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 10,
+            fontWeight: FontWeight.w700,
+            color: isSelected ? Colors.white : AppColors.textSecondary,
           ),
         ),
       ),
@@ -827,6 +859,18 @@ class DashboardScreen extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
+
+          // Embed OpenStreetMap Spatial Mesh for Competitor Density Analysis
+          if (section.id == 'competitor_density') ...[
+            const SizedBox(height: 4),
+            const OsmMapPreview(
+              radiusKm: 5.0,
+              locationTitle: 'Shivajinagar, Baramati Rural',
+              coordinates: '18.1512° N, 74.5771° E',
+              height: 270,
+            ),
+            const SizedBox(height: 14),
+          ],
 
           // Items with Truth Flags
           ...section.items.map((item) {

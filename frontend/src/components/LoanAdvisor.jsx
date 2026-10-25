@@ -325,7 +325,7 @@ export default function LoanAdvisor({
         boxShadow: '0 4px 20px rgba(111, 61, 255, 0.08)'
       }}>
         <div className="loan-advisor-banking-header">
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div className="banking-title-cluster">
             <div style={{
               width: 44,
               height: 44,
@@ -339,14 +339,14 @@ export default function LoanAdvisor({
             }}>
               <Landmark size={22} />
             </div>
-            <div>
+            <div style={{ minWidth: 0, flex: 1 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                <h2 style={{ fontSize: '1.25rem', color: '#1E293B', margin: 0 }}>Your Banking Details</h2>
+                <h2 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.25rem)', color: '#1E293B', margin: 0 }}>Your Banking Details</h2>
                 <span style={{ fontSize: '0.72rem', background: '#EDE7FF', color: '#6F3DFF', padding: '3px 8px', borderRadius: 6, fontWeight: 700 }}>
                   Personalized Financing Match
                 </span>
               </div>
-              <p style={{ fontSize: '0.84rem', color: '#64748B', marginTop: 2 }}>
+              <p style={{ fontSize: '0.84rem', color: '#64748B', marginTop: 4, lineHeight: 1.4 }}>
                 Tell us where you bank so we prioritize your relationship branch for Mudra, NABARD, or PMEGP subsidies.
               </p>
             </div>
@@ -355,8 +355,8 @@ export default function LoanAdvisor({
           <button
             type="button"
             onClick={() => setIsBankingOpen(!isBankingOpen)}
-            className="btn-secondary"
-            style={{ padding: '6px 12px', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}
+            className="btn-secondary banking-toggle-btn"
+            style={{ padding: '8px 14px', fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: 6 }}
           >
             <span>{isBankingOpen ? 'Hide Section' : 'Edit Banking'}</span>
             {isBankingOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}

@@ -84,26 +84,28 @@ export default function Navbar({
               cursor: 'pointer', 
               display: 'flex', 
               alignItems: 'center', 
-              gap: 10,
-              flexShrink: 0 
+              gap: 8,
+              flexShrink: 1,
+              minWidth: 0
             }}
           >
             <div style={{
-              width: 38,
-              height: 38,
+              width: 36,
+              height: 36,
               borderRadius: 10,
               background: 'linear-gradient(135deg, #6F3DFF 0%, #BFE9FF 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               color: '#FFF',
-              boxShadow: '0 4px 12px rgba(111, 61, 255, 0.28)'
+              boxShadow: '0 4px 12px rgba(111, 61, 255, 0.28)',
+              flexShrink: 0
             }}>
-              <Building2 size={22} color="#FFF" />
+              <Building2 size={20} color="#FFF" />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                <span style={{ fontSize: '1.2rem', fontWeight: 800, color: '#13151A', letterSpacing: '-0.02em' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'nowrap' }}>
+                <span style={{ fontSize: 'clamp(1.02rem, 3.5vw, 1.2rem)', fontWeight: 800, color: '#13151A', letterSpacing: '-0.02em', whiteSpace: 'nowrap' }}>
                   RuralBiz <strong style={{ color: '#6F3DFF' }}>AI</strong>
                 </span>
                 <span className="nav-brand-badge" style={{ 
@@ -113,7 +115,8 @@ export default function Navbar({
                   padding: '2px 7px', 
                   borderRadius: 5, 
                   fontWeight: 800,
-                  letterSpacing: '0.04em'
+                  letterSpacing: '0.04em',
+                  whiteSpace: 'nowrap'
                 }}>
                   SIH 26091
                 </span>

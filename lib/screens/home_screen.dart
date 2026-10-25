@@ -260,7 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(width: 8),
-              const BhashiniMicButton(),
+              const BhashiniMicButton(compact: true),
             ],
           ),
           const SizedBox(height: 10),
@@ -322,6 +322,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: DropdownButton<String>(
               value: provider.selectedCategoryId,
               isExpanded: true,
+              itemHeight: 64.0,
               icon: const Icon(Icons.keyboard_arrow_down, color: AppColors.ultraviolet),
               items: MockAdvisoryRepository.categories.map((cat) {
                 return DropdownMenuItem<String>(
@@ -341,9 +342,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
                               cat.title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
@@ -595,21 +599,27 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Row(
                   children: [
-                    Text(
-                      'Pushed GPS Anchor',
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.glacierBlueDark,
+                    Flexible(
+                      child: Text(
+                        'Pushed GPS Anchor',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.glacierBlueDark,
+                        ),
                       ),
                     ),
-                    SizedBox(width: 6),
-                    Icon(Icons.check_circle, size: 12, color: AppColors.truthGreen),
+                    const SizedBox(width: 4),
+                    const Icon(Icons.check_circle, size: 12, color: AppColors.truthGreen),
                   ],
                 ),
                 SizedBox(height: 2),
                 Text(
                   'Baramati Rural (18.1512° N, 74.5771° E)',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
@@ -618,6 +628,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Text(
                   'Bounding Box: 5.0 km OpenStreetMap Search Radius',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
                 ),
               ],

@@ -5,7 +5,9 @@ import '../providers/advisory_provider.dart';
 import '../theme/app_colors.dart';
 
 class BhashiniMicButton extends StatefulWidget {
-  const BhashiniMicButton({super.key});
+  final bool compact;
+
+  const BhashiniMicButton({super.key, this.compact = false});
 
   @override
   State<BhashiniMicButton> createState() => _BhashiniMicButtonState();
@@ -259,16 +261,18 @@ class _BhashiniMicButtonState extends State<BhashiniMicButton>
                   size: 14,
                 ),
               ),
-              const SizedBox(width: 8),
-              const Text(
-                'Bhashini Voice Input',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.3,
+              if (!widget.compact) ...[
+                const SizedBox(width: 8),
+                const Text(
+                  'Bhashini Voice Input',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.3,
+                  ),
                 ),
-              ),
+              ],
             ],
           ),
         ),

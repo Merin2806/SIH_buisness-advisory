@@ -50,55 +50,57 @@ class DynamicUnitEconomicsBudgeter extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Header with AI/Simulation Tag
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                spacing: 8,
+                runSpacing: 8,
                 children: [
-                  Expanded(
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: AppColors.glacierBlueSoft,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const FaIcon(
-                            FontAwesomeIcons.sliders,
-                            color: AppColors.glacierBlueDark,
-                            size: 16,
-                          ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: AppColors.glacierBlueSoft,
+                          borderRadius: BorderRadius.circular(10),
                         ),
-                        const SizedBox(width: 10),
-                        const Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Dynamic Unit Economics Budgeter',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.textPrimary,
-                                ),
-                              ),
-                              Text(
-                                'Interactive Local Feed & Cost Simulator',
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: AppColors.textSecondary,
-                                ),
-                              ),
-                            ],
-                          ),
+                        child: const FaIcon(
+                          FontAwesomeIcons.sliders,
+                          color: AppColors.glacierBlueDark,
+                          size: 16,
                         ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(width: 10),
+                      const Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Unit Economics Budgeter',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.textPrimary,
+                              ),
+                            ),
+                            Text(
+                              'Local Feed & Cost Simulator',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 11,
+                                color: AppColors.textSecondary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
                     decoration: BoxDecoration(
@@ -136,7 +138,7 @@ class DynamicUnitEconomicsBudgeter extends StatelessWidget {
               // Prominent Real-Time Break-Even Display Card
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(18),
+                padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -149,43 +151,46 @@ class DynamicUnitEconomicsBudgeter extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   border: Border.all(color: AppColors.glacierBlue.withOpacity(0.3)),
                 ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 6,
-                      child: Column(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final bool isNarrow = constraints.maxWidth < 290;
+                    if (isNarrow) {
+                      return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Row(
+                          Row(
                             children: [
-                              FaIcon(
+                              const FaIcon(
                                 FontAwesomeIcons.chartLine,
                                 size: 12,
                                 color: AppColors.ultraviolet,
                               ),
-                              SizedBox(width: 6),
-                              Text(
-                                'DAILY BREAK-EVEN TARGET',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.w800,
-                                  color: AppColors.ultraviolet,
-                                  letterSpacing: 0.8,
+                              const SizedBox(width: 6),
+                              const Expanded(
+                                child: Text(
+                                  'DAILY BREAK-EVEN TARGET',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w800,
+                                    color: AppColors.ultraviolet,
+                                    letterSpacing: 0.8,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                           const SizedBox(height: 6),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.baseline,
-                            textBaseline: TextBaseline.alphabetic,
+                          Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
                               Text(
                                 breakEvenUnits.isInfinite || breakEvenUnits > 900
                                     ? 'Unviable'
                                     : breakEvenUnits.toStringAsFixed(1),
                                 style: const TextStyle(
-                                  fontSize: 34,
+                                  fontSize: 24,
                                   fontWeight: FontWeight.w900,
                                   color: AppColors.ultraviolet,
                                   height: 1.0,
@@ -195,65 +200,176 @@ class DynamicUnitEconomicsBudgeter extends StatelessWidget {
                               const Text(
                                 'Birds / Day',
                                 style: TextStyle(
-                                  fontSize: 14,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.bold,
                                   color: AppColors.textPrimary,
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Or ~${(breakEvenUnits * 14).ceil()} Desi eggs/day to cover all fixed costs',
-                            style: const TextStyle(
-                              fontSize: 11,
-                              color: AppColors.textSecondary,
-                            ),
+                          const SizedBox(height: 10),
+                          const Divider(height: 1, color: AppColors.mineralGreyLight),
+                          const SizedBox(height: 10),
+                          Wrap(
+                            alignment: WrapAlignment.spaceBetween,
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            spacing: 8,
+                            runSpacing: 4,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Text(
+                                    'NET MARGIN / UNIT',
+                                    style: TextStyle(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppColors.textMuted,
+                                      letterSpacing: 0.5,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    '₹${marginPerUnit.toStringAsFixed(1)}',
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w800,
+                                      color: zoneColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                '${marginPct.toStringAsFixed(1)}% of Sale',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w700,
+                                  color: zoneColor,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                    ),
-                    Container(
-                      height: 56,
-                      width: 1,
-                      color: AppColors.mineralGreyLight,
-                    ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'NET MARGIN / UNIT',
-                            style: TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.textMuted,
-                              letterSpacing: 0.5,
-                            ),
+                      );
+                    }
+
+                    return Row(
+                      children: [
+                        Expanded(
+                          flex: 6,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Row(
+                                children: [
+                                  FaIcon(
+                                    FontAwesomeIcons.chartLine,
+                                    size: 12,
+                                    color: AppColors.ultraviolet,
+                                  ),
+                                  SizedBox(width: 6),
+                                  Expanded(
+                                    child: Text(
+                                      'DAILY BREAK-EVEN TARGET',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w800,
+                                        color: AppColors.ultraviolet,
+                                        letterSpacing: 0.8,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 6),
+                              Wrap(
+                                crossAxisAlignment: WrapCrossAlignment.center,
+                                children: [
+                                  Text(
+                                    breakEvenUnits.isInfinite || breakEvenUnits > 900
+                                        ? 'Unviable'
+                                        : breakEvenUnits.toStringAsFixed(1),
+                                    style: const TextStyle(
+                                      fontSize: 26,
+                                      fontWeight: FontWeight.w900,
+                                      color: AppColors.ultraviolet,
+                                      height: 1.0,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  const Text(
+                                    'Birds / Day',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppColors.textPrimary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                'Or ~${(breakEvenUnits * 14).ceil()} Desi eggs/day fixed cover',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontSize: 10,
+                                  color: AppColors.textSecondary,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            '₹${marginPerUnit.toStringAsFixed(1)}',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w800,
-                              color: zoneColor,
-                            ),
+                        ),
+                        Container(
+                          height: 56,
+                          width: 1,
+                          color: AppColors.mineralGreyLight,
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          flex: 4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'NET MARGIN / UNIT',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.textMuted,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                '₹${marginPerUnit.toStringAsFixed(1)}',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w800,
+                                  color: zoneColor,
+                                ),
+                              ),
+                              Text(
+                                '${marginPct.toStringAsFixed(1)}% of Sale',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w600,
+                                  color: zoneColor,
+                                ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            '${marginPct.toStringAsFixed(1)}% of Sale',
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w600,
-                              color: zoneColor,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
 
@@ -263,23 +379,30 @@ class DynamicUnitEconomicsBudgeter extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Local Material & Feed Cost (per bird)',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.textPrimary,
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Local Material & Feed Cost',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.textPrimary,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Drag to reflect your local dealer grain/chick rate',
-                        style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
-                      ),
-                    ],
+                        Text(
+                          'Local dealer grain/chick rate',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                        ),
+                      ],
+                    ),
                   ),
+                  const SizedBox(width: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
@@ -289,7 +412,7 @@ class DynamicUnitEconomicsBudgeter extends StatelessWidget {
                     child: Text(
                       '₹${feedCost.toInt()} / bird',
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.w800,
                         color: AppColors.ultraviolet,
                       ),
@@ -317,13 +440,36 @@ class DynamicUnitEconomicsBudgeter extends StatelessWidget {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('₹60 (Subsidized Co-op)', style: TextStyle(fontSize: 10, color: AppColors.textMuted)),
-                    Text('₹90 (Avg Benchmark)', style: TextStyle(fontSize: 10, color: AppColors.textMuted)),
-                    Text('₹135 (Severe Inflation)', style: TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                    Flexible(
+                      child: Text(
+                        '₹60 (Co-op)',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 10, color: AppColors.textMuted),
+                      ),
+                    ),
+                    Flexible(
+                      child: Text(
+                        '₹90 (Avg)',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 10, color: AppColors.textMuted),
+                      ),
+                    ),
+                    Flexible(
+                      child: Text(
+                        '₹135 (High)',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.end,
+                        style: TextStyle(fontSize: 10, color: AppColors.textMuted),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -334,23 +480,30 @@ class DynamicUnitEconomicsBudgeter extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Farm-Gate Selling Price (per bird)',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.textPrimary,
+                  const Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Farm-Gate Selling Price',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.textPrimary,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'Direct consumer or local dhaba realization',
-                        style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
-                      ),
-                    ],
+                        Text(
+                          'Direct consumer or dhaba rate',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(fontSize: 11, color: AppColors.textSecondary),
+                        ),
+                      ],
+                    ),
                   ),
+                  const SizedBox(width: 8),
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                     decoration: BoxDecoration(
@@ -360,7 +513,7 @@ class DynamicUnitEconomicsBudgeter extends StatelessWidget {
                     child: Text(
                       '₹${sellingPrice.toInt()} / bird',
                       style: const TextStyle(
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.w800,
                         color: AppColors.glacierBlueDark,
                       ),
@@ -388,13 +541,36 @@ class DynamicUnitEconomicsBudgeter extends StatelessWidget {
                 ),
               ),
               const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 12),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('₹120 (Wholesale Trader)', style: TextStyle(fontSize: 10, color: AppColors.textMuted)),
-                    Text('₹160 (Recommended)', style: TextStyle(fontSize: 10, color: AppColors.textMuted)),
-                    Text('₹220 (Premium Desi/Direct)', style: TextStyle(fontSize: 10, color: AppColors.textMuted)),
+                    Flexible(
+                      child: Text(
+                        '₹120 (Wholesale)',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(fontSize: 10, color: AppColors.textMuted),
+                      ),
+                    ),
+                    Flexible(
+                      child: Text(
+                        '₹160 (Target)',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 10, color: AppColors.textMuted),
+                      ),
+                    ),
+                    Flexible(
+                      child: Text(
+                        '₹220 (Premium)',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.end,
+                        style: TextStyle(fontSize: 10, color: AppColors.textMuted),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -403,9 +579,11 @@ class DynamicUnitEconomicsBudgeter extends StatelessWidget {
               const Divider(color: AppColors.mineralGreyLight, height: 1),
               const SizedBox(height: 14),
 
-              // Forecast Summary Pill Box
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // Forecast Summary Pill Box with Wrap
+              Wrap(
+                spacing: 16,
+                runSpacing: 10,
+                alignment: WrapAlignment.spaceBetween,
                 children: [
                   _buildQuickMetric(
                     title: 'Monthly Fixed Burden',
@@ -438,34 +616,43 @@ class DynamicUnitEconomicsBudgeter extends StatelessWidget {
     required String sub,
     Color? highlightColor,
   }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 10,
-            color: AppColors.textMuted,
-            fontWeight: FontWeight.w600,
+    return SizedBox(
+      width: 95,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 10,
+              color: AppColors.textMuted,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
-        const SizedBox(height: 2),
-        Text(
-          val,
-          style: TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w800,
-            color: highlightColor ?? AppColors.textPrimary,
+          const SizedBox(height: 2),
+          Text(
+            val,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 13,
+              fontWeight: FontWeight.w800,
+              color: highlightColor ?? AppColors.textPrimary,
+            ),
           ),
-        ),
-        Text(
-          sub,
-          style: const TextStyle(
-            fontSize: 9,
-            color: AppColors.textSecondary,
+          Text(
+            sub,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 9,
+              color: AppColors.textSecondary,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

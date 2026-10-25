@@ -450,10 +450,289 @@ button {
   word-break: break-word;
 }
 
+/* ==========================================================================
+   RESPONSIVE LAYOUTS & BREAKPOINT UTILITIES
+   ========================================================================== */
+
+/* Budgeter Split Grid */
 .budgeter-split-grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 32px;
+}
+
+@media (max-width: 991px) {
+  .budgeter-split-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Overhead Breakdown Inputs */
+.overhead-inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+@media (max-width: 480px) {
+  .overhead-inputs-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* Report Header Responsive Cluster */
+.report-top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.report-id-badge-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .report-top-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .report-id-badge-group {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* Report Overview Hero Banner */
+.report-hero-card {
+  background: linear-gradient(135deg, #13151A 0%, #2A2538 100%);
+  border-radius: 24px;
+  padding: clamp(18px, 3.5vw, 32px) clamp(16px, 4vw, 36px);
+  color: #FFFFFF;
+  margin-bottom: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.report-hero-details {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+
+.report-audio-console {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 0 1 340px;
+  max-width: 100%;
+}
+
+@media (max-width: 767px) {
+  .report-audio-console {
+    flex: 1 1 100%;
+  }
+}
+
+/* Report Section Tabs & Telemetry Filter */
+.report-tabs-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 2px solid #E2E8F0;
+  margin-bottom: 28px;
+  gap: 12px;
+}
+
+.report-tabs-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.report-tabs-list::-webkit-scrollbar {
+  display: none;
+}
+
+.report-filter-cluster {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+  .report-tabs-bar {
+    flex-direction: column;
+    align-items: stretch;
+    border-bottom: none;
+  }
+  .report-tabs-list {
+    border-bottom: 2px solid #E2E8F0;
+    gap: 12px;
+  }
+  .report-filter-cluster {
+    padding-top: 8px;
+    justify-content: flex-start;
+  }
+}
+
+/* 6-Part Report Grids */
+.report-evidence-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 767px) {
+  .report-evidence-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* SWOT Matrix Responsive Grid */
+.swot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 767px) {
+  .swot-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* Financial Highlights Grid */
+.financial-highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 1023px) {
+  .financial-highlights-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .financial-highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* Capital Structuring Split Grid */
+.capital-structuring-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+@media (max-width: 860px) {
+  .capital-structuring-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* Banking Section Responsive Header */
+.loan-advisor-banking-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.banking-title-cluster {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1 1 280px;
+  min-width: 0;
+}
+
+.banking-toggle-btn {
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .loan-advisor-banking-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .banking-toggle-btn {
+    align-self: flex-start;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.banking-question-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .banking-question-buttons {
+    flex-direction: column;
+  }
+  .banking-question-buttons button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Leaflet Map Mobile Container */
+.osm-map-container {
+  width: 100%;
+  height: 320px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid #CBD5E1;
+}
+
+@media (max-width: 480px) {
+  .osm-map-container {
+    height: 260px;
+  }
+}
+
+.osm-map-legend-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
 }
 
 .auth-modal-dialog {
@@ -491,20 +770,6 @@ button {
   margin-top: 24px;
   padding-top: 16px;
   border-top: 1px solid #F1F5F9;
-}
-
-.loan-advisor-banking-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 16px;
-}
-
-.banking-question-buttons {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
 }
 
 .horizontal-scroll-tabs {
@@ -557,6 +822,14 @@ button {
 
   .nav-brand-badge {
     display: none;
+  }
+
+  .site-header .container {
+    padding: 0 12px !important;
+  }
+
+  .card {
+    padding: 16px !important;
   }
 }
 

@@ -8,12 +8,14 @@ class OsmMapPreview extends StatefulWidget {
   final double radiusKm;
   final String locationTitle;
   final String coordinates;
+  final double? height;
 
   const OsmMapPreview({
     super.key,
     this.radiusKm = 5.0,
     this.locationTitle = 'Shivajinagar, Baramati Rural',
     this.coordinates = '18.1512° N, 74.5771° E',
+    this.height = 300.0,
   });
 
   @override
@@ -94,16 +96,18 @@ class _OsmMapPreviewState extends State<OsmMapPreview>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: const Color(0xFF0F1522),
-        borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.glacierBlue.withOpacity(0.3)),
-        boxShadow: AppColors.softShadow,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
+    return SizedBox(
+      height: widget.height ?? 300.0,
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color(0xFF0F1522),
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: AppColors.glacierBlue.withOpacity(0.3)),
+          boxShadow: AppColors.softShadow,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
           // Map Header
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
@@ -114,10 +118,14 @@ class _OsmMapPreviewState extends State<OsmMapPreview>
                 topRight: Radius.circular(24),
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              spacing: 8,
+              runSpacing: 6,
               children: [
                 Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
                       width: 8,
@@ -127,9 +135,9 @@ class _OsmMapPreviewState extends State<OsmMapPreview>
                         shape: BoxShape.circle,
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 6),
                     const Text(
-                      'OPENSTREETMAP SPATIAL MESH',
+                      'OSM SPATIAL MESH',
                       style: TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w800,
@@ -359,8 +367,9 @@ class _OsmMapPreviewState extends State<OsmMapPreview>
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildMapLegend(String label, Color color) {
     return Row(
