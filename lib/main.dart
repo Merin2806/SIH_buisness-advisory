@@ -8,6 +8,7 @@ import 'screens/desktop_home_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/loading_screen.dart';
 import 'theme/app_colors.dart';
+import 'views/app_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -96,6 +97,12 @@ class _MainAppNavigatorState extends State<MainAppNavigator> {
 
   @override
   Widget build(BuildContext context) {
+    if (isWebPlatform) {
+      return Scaffold(
+        body: getWebAppView(),
+      );
+    }
+
     final screenWidth = MediaQuery.of(context).size.width;
     final bool isWideScreen = screenWidth >= 960;
     final bool renderDesktopMode = isWideScreen && !_forceMobileView;
