@@ -587,7 +587,7 @@ class DashboardScreen extends StatelessWidget {
           _buildCheckItem('Aadhaar & PAN KYC linked bank account', true),
           _buildCheckItem('Zero Collateral Guarantee (Covered under CGTMSE)', true),
           _buildCheckItem('Gram Panchayat No-Objection for poultry shed', true),
-          _buildCheckItem('Project Report auto-certified by Gram-Advisor AI', true),
+          _buildCheckItem('Project Report auto-certified by RuralBiz AI', true),
         ],
       ),
     );

@@ -127,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'GRAM-ADVISOR AI',
+                            'RURALBIZ AI',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -138,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           Text(
-                            'Smart India Hackathon 2026',
+                            'SIH 26091 • Rural Advisory',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(

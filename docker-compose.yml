@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: ruralbiz_postgres
+    environment:
+      POSTGRES_DB: ruralbiz
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ruralbiz"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ruralbiz_backend
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://postgres:postgrespassword@db:5432/ruralbiz
+      SECRET_KEY: ${SECRET_KEY:-super-secret-ruralbiz-sih-26091-jwt-encryption-key-2026}
+      ADMIN_NAME: ${ADMIN_NAME:-Riya}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-riyamokale@gmail.com}
+      ADMIN_PHONE: ${ADMIN_PHONE:-9326577285}
+      ADMIN_INITIAL_PASSWORD: ${ADMIN_INITIAL_PASSWORD:-AdminRuralBiz@2026}
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      BHASHINI_API_KEY: ${BHASHINI_API_KEY}
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ruralbiz_frontend
+    restart: always
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

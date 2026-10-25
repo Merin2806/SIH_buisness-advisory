@@ -27,7 +27,7 @@ class SihAdvisoryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Gram-Advisor AI | SIH 2026',
+      title: 'RuralBiz AI | SIH 26091',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,

@@ -220,7 +220,7 @@ class _DesktopHomeScreenState extends State<DesktopHomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'GRAM-ADVISOR AI',
+                    'RURALBIZ AI',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w900,
@@ -229,7 +229,7 @@ class _DesktopHomeScreenState extends State<DesktopHomeScreen> {
                     ),
                   ),
                   Text(
-                    'AI-Driven Hyper-Local Business Advisory & Financial Structuring',
+                    'SIH 26091 • Hyper-Local Business Advisory & Financial Structuring',
                     style: TextStyle(
                       fontSize: 11,
                       color: Color(0xFFD6E4F5),
