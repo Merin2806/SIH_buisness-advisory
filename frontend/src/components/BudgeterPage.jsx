@@ -12,8 +12,9 @@ import {
   DollarSign
 } from 'lucide-react';
 import { api } from '../api';
+import BackButton from './common/BackButton';
 
-export default function BudgeterPage({ user }) {
+export default function BudgeterPage({ user, onBack }) {
   // Budget Inputs State
   const [sellingPrice, setSellingPrice] = useState(155.0);
   const [rawMaterialCost, setRawMaterialCost] = useState(88.0);
@@ -140,6 +141,13 @@ export default function BudgeterPage({ user }) {
 
   return (
     <div className="container" style={{ padding: 'clamp(20px, 4vw, 40px) 16px 80px 16px' }}>
+      {onBack && (
+        <BackButton 
+          onClick={onBack} 
+          label={user ? 'Back to Dashboard' : 'Back to Home'} 
+          style={{ marginBottom: 20 }} 
+        />
+      )}
       <div style={{ marginBottom: 32 }}>
         <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: '#EDE7FF', color: '#6F3DFF', padding: '4px 12px', borderRadius: 999, fontSize: '0.8rem', fontWeight: 700, marginBottom: 8 }}>
           <Sliders size={14} />

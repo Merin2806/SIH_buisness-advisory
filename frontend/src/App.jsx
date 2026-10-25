@@ -9,12 +9,14 @@ import BudgeterPage from './components/BudgeterPage';
 import AdminDashboard from './components/AdminDashboard';
 import AuthModal from './components/AuthModal';
 import VoiceModal from './components/VoiceModal';
+import ErrorBoundary from './components/common/ErrorBoundary';
 import { getCurrentUser, setAuthToken, setCurrentUser as saveCurrentUser, api } from './api';
 import { getTranslation } from './i18n';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState('landing'); 
   // 'landing', 'dashboard', 'wizard', 'report', 'loan_advisor', 'budgeter', 'admin'
+  const [tabHistory, setTabHistory] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [selectedAssessmentId, setSelectedAssessmentId] = useState(null);
   const [lang, setLang] = useState(() => localStorage.getItem('ruralbiz_lang') || 'en');
@@ -131,7 +133,7 @@ export default function App() {
     setCurrentTab('loan_advisor');
   };
 
-  // Route protection
+  // Route protection with history tracking
   const navigateTab = (targetTab) => {
     // If route is protected and user is not logged in
     const protectedTabs = ['dashboard', 'wizard', 'report', 'loan_advisor', 'admin'];
@@ -144,7 +146,20 @@ export default function App() {
       setCurrentTab('dashboard');
       return;
     }
+    if (targetTab !== currentTab) {
+      setTabHistory((prev) => [...prev, currentTab]);
+    }
     setCurrentTab(targetTab);
+  };
+
+  const handleGoBack = () => {
+    if (tabHistory.length > 0) {
+      const prevTab = tabHistory[tabHistory.length - 1];
+      setTabHistory((prev) => prev.slice(0, -1));
+      setCurrentTab(prevTab);
+    } else {
+      setCurrentTab(currentUser ? (currentUser.role === 'admin' ? 'admin' : 'dashboard') : 'landing');
+    }
   };
 
   return (
@@ -163,72 +178,76 @@ export default function App() {
       />
 
       <main style={{ flex: 1 }}>
-        {/* PUBLIC FLOW: Landing Page */}
-        {currentTab === 'landing' && (
-          <LandingPage 
-            onStartAssessment={handleStartAssessment}
-            onExploreBudgeter={() => setCurrentTab('budgeter')}
-            onOpenVoice={() => setVoiceModalOpen(true)}
-            onOpenAuth={openAuth}
-            lang={lang}
-          />
-        )}
+        <ErrorBoundary onReset={() => setCurrentTab(currentUser ? 'dashboard' : 'landing')}>
+          {/* PUBLIC FLOW: Landing Page */}
+          {currentTab === 'landing' && (
+            <LandingPage 
+              onStartAssessment={handleStartAssessment}
+              onExploreBudgeter={() => navigateTab('budgeter')}
+              onOpenVoice={() => setVoiceModalOpen(true)}
+              onOpenAuth={openAuth}
+              lang={lang}
+            />
+          )}
 
-        {/* AUTHENTICATED USER FLOW */}
-        {currentTab === 'dashboard' && currentUser && (
-          <UserDashboard 
-            user={currentUser}
-            onNewAssessment={handleStartAssessment}
-            onOpenReport={handleViewReport}
-            onOpenBudgeter={() => setCurrentTab('budgeter')}
-            onOpenLoanAdvisor={handleOpenLoanAdvisor}
-            onOpenVoice={() => setVoiceModalOpen(true)}
-            lang={lang}
-          />
-        )}
+          {/* AUTHENTICATED USER FLOW */}
+          {currentTab === 'dashboard' && currentUser && (
+            <UserDashboard 
+              user={currentUser}
+              onNewAssessment={handleStartAssessment}
+              onOpenReport={handleViewReport}
+              onOpenBudgeter={() => navigateTab('budgeter')}
+              onOpenLoanAdvisor={handleOpenLoanAdvisor}
+              onOpenVoice={() => setVoiceModalOpen(true)}
+              lang={lang}
+            />
+          )}
 
-        {currentTab === 'wizard' && currentUser && (
-          <AssessmentWizard 
-            onComplete={handleAssessmentCompleted}
-            onCancel={() => setCurrentTab('dashboard')}
-            lang={lang}
-          />
-        )}
+          {currentTab === 'wizard' && currentUser && (
+            <AssessmentWizard 
+              onComplete={handleAssessmentCompleted}
+              onCancel={handleGoBack}
+              lang={lang}
+            />
+          )}
 
-        {currentTab === 'report' && currentUser && selectedAssessmentId && (
-          <ReportViewer 
-            assessmentId={selectedAssessmentId}
-            onBack={() => setCurrentTab('dashboard')}
-            onOpenLoanAdvisor={() => setCurrentTab('loan_advisor')}
-            lang={lang}
-          />
-        )}
+          {currentTab === 'report' && currentUser && selectedAssessmentId && (
+            <ReportViewer 
+              assessmentId={selectedAssessmentId}
+              onBack={handleGoBack}
+              onOpenLoanAdvisor={() => navigateTab('loan_advisor')}
+              lang={lang}
+            />
+          )}
 
-        {currentTab === 'loan_advisor' && currentUser && (
-          <LoanAdvisor 
-            user={currentUser}
-            initialAssessmentId={selectedAssessmentId}
-            onStartNewAssessment={handleStartAssessment}
-            lang={lang}
-          />
-        )}
+          {currentTab === 'loan_advisor' && currentUser && (
+            <LoanAdvisor 
+              user={currentUser}
+              initialAssessmentId={selectedAssessmentId}
+              onStartNewAssessment={handleStartAssessment}
+              onBack={handleGoBack}
+              lang={lang}
+            />
+          )}
 
-        {currentTab === 'budgeter' && (
-          <BudgeterPage 
-            user={currentUser} 
-            lang={lang} 
-          />
-        )}
+          {currentTab === 'budgeter' && (
+            <BudgeterPage 
+              user={currentUser} 
+              onBack={handleGoBack}
+              lang={lang} 
+            />
+          )}
 
-        {/* ADMIN FLOW */}
-        {currentTab === 'admin' && currentUser?.role === 'admin' && (
-          <AdminDashboard 
-            user={currentUser} 
-            lang={lang}
-            activeSection={adminSection}
-            onSectionChange={setAdminSection}
-          />
-        )}
+          {/* ADMIN FLOW */}
+          {currentTab === 'admin' && currentUser?.role === 'admin' && (
+            <AdminDashboard 
+              user={currentUser} 
+              lang={lang}
+              activeSection={adminSection}
+              onSectionChange={setAdminSection}
+            />
+          )}
+        </ErrorBoundary>
       </main>
 
       {/* Auth Modal */}

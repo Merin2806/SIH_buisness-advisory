@@ -32,11 +32,13 @@ import {
 import { api } from '../api';
 import { getTranslation } from '../i18n';
 import { INDIAN_BANKS_LIST } from '../data/indiaLocations';
+import BackButton from './common/BackButton';
 
 export default function LoanAdvisor({ 
   user, 
   initialAssessmentId = null, 
   onStartNewAssessment,
+  onBack,
   lang = 'en'
 }) {
   const [assessments, setAssessments] = useState([]);
@@ -203,14 +205,19 @@ export default function LoanAdvisor({
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: 24 }}>
             To generate personalized government scheme matching (Mudra, NABARD, PMEGP) and calculate exact EMIs, please complete a business assessment first.
           </p>
-          <button 
-            onClick={onStartNewAssessment}
-            className="btn-primary"
-            style={{ padding: '12px 24px' }}
-          >
-            <span>Start Business Assessment</span>
-            <ArrowRight size={16} />
-          </button>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+            {onBack && (
+              <BackButton onClick={onBack} label="Back to Dashboard" />
+            )}
+            <button 
+              onClick={onStartNewAssessment}
+              className="btn-primary"
+              style={{ padding: '10px 22px' }}
+            >
+              <span>Start Business Assessment</span>
+              <ArrowRight size={16} />
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -230,7 +237,12 @@ export default function LoanAdvisor({
   } = adviceData || {};
 
   return (
-    <div className="container" style={{ padding: '36px 24px 80px 24px' }}>
+    <div className="container" style={{ padding: '24px 24px 80px 24px' }}>
+      {onBack && (
+        <div style={{ marginBottom: 16 }}>
+          <BackButton onClick={onBack} label="Back to Dashboard" />
+        </div>
+      )}
       {/* Header Banner */}
       <div style={{
         background: 'linear-gradient(135deg, #6F3DFF 0%, #3B1B99 100%)',

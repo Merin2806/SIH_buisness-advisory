@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { api } from '../api';
 import { getTranslation } from '../i18n';
+import BackButton from './common/BackButton';
 
 export default function AdminDashboard({ 
   user, 
@@ -247,6 +248,15 @@ export default function AdminDashboard({
           <span>Refresh Telemetry</span>
         </button>
       </div>
+
+      {activeSection !== 'overview' && (
+        <div style={{ marginBottom: 16 }}>
+          <BackButton 
+            onClick={() => setActiveSection('overview')} 
+            label="← Back to Dashboard Overview" 
+          />
+        </div>
+      )}
 
       {/* Primary Section Switcher */}
       <div className="horizontal-scroll-tabs">

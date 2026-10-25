@@ -11,7 +11,8 @@ import {
   ShieldCheck, 
   Building2,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  ArrowLeft
 } from 'lucide-react';
 import { api } from '../api';
 
@@ -296,7 +297,27 @@ export default function AuthModal({ initialMode = 'login', onClose, onSuccess })
 
         {/* Split Screen Form Side */}
         <div className="auth-modal-form-container">
-          <div style={{ marginBottom: 24 }}>
+          <div style={{ marginBottom: 20 }}>
+            <button
+              type="button"
+              onClick={onClose}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#64748B',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 5,
+                fontSize: '0.82rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+                padding: '4px 0',
+                marginBottom: 10
+              }}
+            >
+              <ArrowLeft size={15} />
+              <span>Back to Application</span>
+            </button>
             <h2 style={{ fontSize: '1.5rem', marginBottom: 6 }}>
               {mode === 'login' ? 'Sign In to Your Account' : 'Register New Account'}
             </h2>

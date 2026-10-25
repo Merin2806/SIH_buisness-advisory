@@ -34,6 +34,7 @@ import {
 import { api } from '../api';
 import { getTranslation } from '../i18n';
 import { INDIAN_STATES, INDIAN_LOCATIONS_DATA } from '../data/indiaLocations';
+import BackButton from './common/BackButton';
 
 export default function AssessmentWizard({ onComplete, onCancel, lang = 'en' }) {
   const [currentStep, setCurrentStep] = useState(1);
@@ -498,21 +499,33 @@ export default function AssessmentWizard({ onComplete, onCancel, lang = 'en' }) 
     <div className="container" style={{ padding: 'clamp(20px, 3vw, 36px) clamp(12px, 3vw, 24px) 100px clamp(12px, 3vw, 24px)', maxWidth: 960 }}>
       {/* Step Header */}
       <div style={{ marginBottom: 28 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-          <div>
-            <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#6F3DFF', textTransform: 'uppercase' }}>
-              SIH 26091 Feasibility Wizard
-            </span>
-            <h1 style={{ fontSize: '1.75rem', color: '#13151A', marginTop: 2 }}>
-              {currentStep === 1 && t('step1Title')}
-              {currentStep === 2 && t('step2Title')}
-              {currentStep === 3 && t('step3Title')}
-              {currentStep === 4 && t('step4Title')}
-              {currentStep === 5 && t('step5Title')}
-            </h1>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14, flexWrap: 'wrap', gap: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <BackButton 
+              onClick={() => {
+                if (currentStep > 1) {
+                  setCurrentStep(currentStep - 1);
+                } else {
+                  onCancel();
+                }
+              }} 
+              label={currentStep > 1 ? `Back to Step ${currentStep - 1}` : 'Back to Dashboard'} 
+            />
+            <div>
+              <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#6F3DFF', textTransform: 'uppercase' }}>
+                SIH 26091 Feasibility Wizard • Step {currentStep} of 5
+              </span>
+              <h1 style={{ fontSize: 'clamp(1.35rem, 3vw, 1.75rem)', color: '#13151A', marginTop: 2 }}>
+                {currentStep === 1 && t('step1Title')}
+                {currentStep === 2 && t('step2Title')}
+                {currentStep === 3 && t('step3Title')}
+                {currentStep === 4 && t('step4Title')}
+                {currentStep === 5 && t('step5Title')}
+              </h1>
+            </div>
           </div>
           <button onClick={onCancel} className="btn-secondary" style={{ padding: '7px 14px', fontSize: '0.82rem' }}>
-            Cancel
+            Exit Wizard
           </button>
         </div>
 
@@ -1271,7 +1284,7 @@ export default function AssessmentWizard({ onComplete, onCancel, lang = 'en' }) 
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: '#64748B' }}>Anchor Location:</span>
-                  <strong>{village}, {district}</strong>
+                  <strong>{villageOrAddress || 'Location specified'}, {district}</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                   <span style={{ color: '#64748B' }}>Total Capital:</span>

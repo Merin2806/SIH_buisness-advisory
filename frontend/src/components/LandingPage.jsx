@@ -275,7 +275,7 @@ export default function LandingPage({ onStartAssessment, onExploreBudgeter, onOp
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 32 }}>
+          <div className="grid-responsive-2">
             {/* Module 1: Financial Structuring */}
             <div className="card" style={{ borderTop: '5px solid #6F3DFF' }}>
               <div style={{
@@ -360,7 +360,7 @@ export default function LandingPage({ onStartAssessment, onExploreBudgeter, onOp
             </p>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+          <div className="grid-responsive-3">
             <div style={{ background: '#FFFFFF', padding: 24, borderRadius: 16, border: '1px solid #A7F3D0' }}>
               <span className="badge-osm" style={{ marginBottom: 14 }}>🟢 Hard OSM Data</span>
               <h4 style={{ fontSize: '1.15rem', marginBottom: 8 }}>Empirical OpenStreetMap Node</h4>
@@ -404,7 +404,7 @@ export default function LandingPage({ onStartAssessment, onExploreBudgeter, onOp
 
       {/* Voice Section */}
       <section style={{ padding: '70px 0' }}>
-        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'linear-gradient(135deg, #6F3DFF 0%, #4D26C4 100%)', borderRadius: 24, padding: '48px 56px', color: '#FFFFFF' }}>
+        <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', background: 'linear-gradient(135deg, #6F3DFF 0%, #4D26C4 100%)', borderRadius: 24, padding: 'clamp(24px, 5vw, 48px) clamp(16px, 5vw, 56px)', color: '#FFFFFF', flexWrap: 'wrap', gap: 28 }}>
           <div style={{ maxWidth: 580 }}>
             <span style={{ background: 'rgba(255,255,255,0.18)', padding: '4px 12px', borderRadius: 999, fontSize: '0.8rem', fontWeight: 700 }}>
               Bhashini Indic AI Integration
